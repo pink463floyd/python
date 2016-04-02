@@ -34,8 +34,33 @@ def bstShow(node):
    node.display()
    bstShow(node.right);
 
-bstAdd(root, 7);
+#Do a breadth first traversal
+def breadth(node):
+   curList = [];
+   nextList = [];
+
+   curList.append(node);
+   displayList = [];
+   while (len(curList) > 0):
+     for x in curList:
+       displayList.append(x.key);
+       if (x.left != None) :
+          nextList.append(x.left);
+       if (x.right != None) :
+          nextList.append(x.right);
+     print(displayList);
+     displayList=[];
+     curList = [];
+     curList = list(nextList);
+     nextList=[];
+   
+bstAdd(root, 10);
 bstAdd(root, 5);
-bstAdd(root, 9);
-bstAdd(root, 1);
+bstAdd(root, 15);
+bstAdd(root, 2);
+bstAdd(root, 8);
+bstAdd(root, 12);
+bstAdd(root, 18);
 bstShow(root);
+print("Breadth traversal");
+breadth(root);
