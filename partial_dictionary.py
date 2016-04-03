@@ -12,6 +12,7 @@ the_page = result.read()
 
 
 
-myList = words(the_page)
-print(myList);
+dupList = words(the_page)
+noDupList=list(set(dupList))
+print(noDupList);
 
