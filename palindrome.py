@@ -1,6 +1,15 @@
 import sys
+#Some good test palindromes
+#noon (This has even number of characters)
+#racecar (This has odd number)
+#A nut for a jar of tuna
+
 
 def isPalindrome(str):
+  #strip whitespace and make lower case.
+  str=str.replace(" ", "");
+  str=str.lower();
+  print(str) 
   beg=0;
   end=len(str)-1;
   
