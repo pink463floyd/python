@@ -15,5 +15,7 @@ the_page = result.read();
 dupList = words(the_page);
 noDupList=list(set(dupList));
 sortedNoDupList = sorted(noDupList);
-print(sortedNoDupList);
+
+for x in sortedNoDupList:
+   print("%s" % (x)) 
 
