@@ -1,5 +1,5 @@
 import sys
-#Some good test palindromes
+#Some good test palindromes:
 #noon (This has even number of characters)
 #racecar (This has odd number)
 #A nut for a jar of tuna
