@@ -1,18 +1,21 @@
-graph = {'A': set(['B', 'C']),
- 'B': set(['A', 'D', 'E']),
- 'C': set(['A', 'F']),
- 'D': set(['B']),
- 'E': set(['B', 'F']),
- 'F': set(['C', 'E'])
+from collections import deque;
+
+G = {'A': ['B', 'C'],
+     'B': ['A', 'D', 'E'],
+     'C': ['A', 'F'],
+     'D': ['B'],
+     'E': ['B', 'F'],
+     'F': ['C', 'E', 'A']
 }
 
-def bfs(graph, start):
-    visited, queue = set(), [start]
-    while queue:
-        vertex = queue.pop(0)
-        if vertex not in visited:
-            visited.add(vertex)
-            queue.extend(graph[vertex] - visited)
-    return visited
+def bfs(g, start):
+    visited = set();
+    q=deque([start]);
+    while q:
+        vertex = q.popleft()
+        print(vertex);
+        visited.add(vertex)
+        x=set(g[vertex])-set(q);
+        q.extend(x - visited);
 
-print(bfs(graph, 'A')) # {'B', 'C', 'A', 'F', 'D', 'E'}
+bfs(G, 'A');
