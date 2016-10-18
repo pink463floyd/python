@@ -9,9 +9,9 @@ def TopDownSplitMerge(scratch, iBegin, iEnd, src):
     iMiddle = (iEnd + iBegin) / 2;             
     TopDownSplitMerge(src, iBegin,  iMiddle, scratch);
     TopDownSplitMerge(src, iMiddle,    iEnd, scratch); 
-    TopDownMerge(scratch, iBegin, iMiddle, iEnd, src);
+    TopDownMerge(src, iBegin, iMiddle, iEnd, scratch);
 
-def TopDownMerge(scratch, iBegin, iMiddle, iEnd, src):
+def TopDownMerge(src, iBegin, iMiddle, iEnd, scratch):
     i = iBegin 
     j = iMiddle
     
