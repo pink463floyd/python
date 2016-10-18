@@ -1,50 +1,37 @@
-def merge(data, start, end, scratch):
-  if start == end: return;
-  mid = end + start / 2; 
-  merge(data, start, mid, scratch);
-  merge(data, mid, end, scratch);
-  aggregate(start, mid, end, data, scratch);
-  copy(scratch, data, start, end);
-  
-def aggregate(start, mid, end, data, scratch)
-  i = start; j = mid; k = 0;
+# Array A[] has the items to sort; array B[] is a work array.
+def TopDownMergeSort(A, B, n):
+    CopyArray(A, 0, n, B);           
+    TopDownSplitMerge(B, 0, n, A);  
 
-  if (i>=mid):
-    scratch[k] = data[j];
-    k=k+1; j=j+1;
+def TopDownSplitMerge(B, iBegin, iEnd, A):
+    if(iEnd - iBegin < 2) :
+        return;
+    iMiddle = (iEnd + iBegin) / 2;             
+    TopDownSplitMerge(A, iBegin,  iMiddle, B);
+    TopDownSplitMerge(A, iMiddle,    iEnd, B); 
+    TopDownMerge(B, iBegin, iMiddle, iEnd, A);
+
+def TopDownMerge(A, iBegin, iMiddle, iEnd, B):
+    i = iBegin 
+    j = iMiddle
     
-  if (j>=end):
-    scratch[j] = data[i];
-    k=k+1; i=i+1;
-  
-  if (data[i] > [data[j]):
-    scratch[k]=data[j];
-    k=k+1; j=j+1;
-  else:
-    scratch[k]=data[i];
-    k=k+1; i=i+1;
-       0   1    2    3    4    5    6    7
-data=['a','x', 'm', 'q', 'r', 't', 'u', 'b'];
-merge(data,0,8,scratch)
- mid=4
- merge(data,0,4,scratch)
-  mid=2
-  merge(data,0,2,scratch)
-   mid=1
-   merge(data,0,1, scratch)
+    k = iBegin
+    while k < iEnd:
+        if (i < iMiddle and (j >= iEnd or A[i] <= A[j])) :
+            B[k] = A[i];
+            i = i + 1;
+        else :
+            B[k] = A[j];
+            j = j + 1;    
+        k = k + 1
 
+def CopyArray(A, iBegin, iEnd, B):
+    k = iBegin
+    while k < iEnd:
+        B.append(A[k]);
+        k=k+1
 
-
-
-def copy(B, A, start, end)
-  i = start;
-  while i<end:
-   A[i] = B[i];
-   i=i+1;
-
-data=['a','x', 'm', 'q', 'r', 't', 'u', 'b'];
-scratch=[];
-merge(data,0,8,scratch);
-print(data);
-
-
+A=['x', 'z', 'a', 'b', 'r', 'n', 'm', 'l']
+B=[]
+TopDownMergeSort(A, B, 7)
+print A
