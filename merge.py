@@ -1,27 +1,27 @@
-# Array A[] has the items to sort; array B[] is a work array.
-def TopDownMergeSort(A, B, n):
-    CopyArray(A, 0, n, B);           
-    TopDownSplitMerge(B, 0, n, A);  
+# Array src[] has the items to sort; array scratch[] is a work array.
+def TopDownMergeSort(src, scratch, n):
+    CopyArray(src, 0, n, scratch);           
+    TopDownSplitMerge(scratch, 0, n, src);  
 
-def TopDownSplitMerge(B, iBegin, iEnd, A):
+def TopDownSplitMerge(scratch, iBegin, iEnd, src):
     if(iEnd - iBegin < 2) :
         return;
     iMiddle = (iEnd + iBegin) / 2;             
-    TopDownSplitMerge(A, iBegin,  iMiddle, B);
-    TopDownSplitMerge(A, iMiddle,    iEnd, B); 
-    TopDownMerge(B, iBegin, iMiddle, iEnd, A);
+    TopDownSplitMerge(src, iBegin,  iMiddle, scratch);
+    TopDownSplitMerge(src, iMiddle,    iEnd, scratch); 
+    TopDownMerge(scratch, iBegin, iMiddle, iEnd, src);
 
-def TopDownMerge(A, iBegin, iMiddle, iEnd, B):
+def TopDownMerge(scratch, iBegin, iMiddle, iEnd, src):
     i = iBegin 
     j = iMiddle
     
     k = iBegin
     while k < iEnd:
-        if (i < iMiddle and (j >= iEnd or A[i] <= A[j])) :
-            B[k] = A[i];
+        if (i < iMiddle and (j >= iEnd or scratch[i] <= scratch[j])) :
+            src[k] = scratch[i];
             i = i + 1;
         else :
-            B[k] = A[j];
+            src[k] = scratch[j];
             j = j + 1;    
         k = k + 1
 
