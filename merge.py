@@ -1,37 +1,37 @@
-# Array src[] has the items to sort; array scratch[] is a work array.
-def TopDownMergeSort(src, scratch, n):
-    CopyArray(src, 0, n, scratch);           
-    TopDownSplitMerge(scratch, 0, n, src);  
+def mergeSort(alist):
+    #print("Splitting ",alist)
+    if len(alist)>1:
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
 
-def TopDownSplitMerge(scratch, iBegin, iEnd, src):
-    if(iEnd - iBegin < 2) :
-        return;
-    iMiddle = (iEnd + iBegin) / 2;             
-    TopDownSplitMerge(src, iBegin,  iMiddle, scratch);
-    TopDownSplitMerge(src, iMiddle,    iEnd, scratch); 
-    TopDownMerge(src, iBegin, iMiddle, iEnd, scratch);
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+        i=0
+        j=0
+        k=0
+        #print("Merging before",alist, lefthalf, righthalf)
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                alist[k]=lefthalf[i]
+                i=i+1
+            else:
+                alist[k]=righthalf[j]
+                j=j+1
+            k=k+1
 
-def TopDownMerge(src, iBegin, iMiddle, iEnd, scratch):
-    i = iBegin 
-    j = iMiddle
-    
-    k = iBegin
-    while k < iEnd:
-        if (i < iMiddle and (j >= iEnd or scratch[i] <= scratch[j])) :
-            src[k] = scratch[i];
-            i = i + 1;
-        else :
-            src[k] = scratch[j];
-            j = j + 1;    
-        k = k + 1
+        while i < len(lefthalf):
+            alist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
 
-def CopyArray(A, iBegin, iEnd, B):
-    k = iBegin
-    while k < iEnd:
-        B.append(A[k]);
-        k=k+1
+        while j < len(righthalf):
+            alist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+        #print("Merging after",alist)
+        print alist, ":: ", lefthalf, righthalf
 
-A=['x', 'z', 'a', 'b', 'r', 'n', 'm', 'l']
-B=[]
-TopDownMergeSort(A, B, 7)
-print A
+alist = [54,26,93,17,77,31,44,55]
+mergeSort(alist)
+print(alist)
